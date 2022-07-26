@@ -27,26 +27,27 @@ def brightening(image):
             new_image[i][j] = (r,g,b)
     return new_image
 
-def contrast_helper(pix,r1,r2):
-    s1 = 0
-    s2 = 255
-    if (0 <= pix and pix <= r1):
-        return (s1 / r1)*pix
-    elif (r1 < pix and pix <= r2):
-        return ((s2 - s1)/(r2 - r1)) * (pix - r1) + s1
-    else:
-        return ((255 - s2)/(255 - r2)) * (pix - r2) + s2
-
 def contrast(image):
     new_image = image
-    r1 = np.min(image)
-    r2 = np.max(image)
+    Imin = np.min(image)
+    Imax = np.max(image)
+    rmin = image[:,:,0].min()
+    rmax = image[:,:,0].max()
+    gmin = image[:,:,1].min()
+    gmax = image[:,:,1].max()
+    bmin = image[:,:,2].min()
+    bmax = image[:,:,2].max()
     for i in range(len(image)):
         for j in range(len(image[i])):
             r,g,b = image[i][j]
-            r = (r-r1)*(255/(r2-r1))
-            g = (g-r1)*(255/(r2-r1))
-            b = (b-r1)*(255/(r2-r1))
+            if Imin == 0 and Imax == 255:
+                r = 255*(r-rmin)/(rmax-rmin)
+                g = 255*(g-gmin)/(gmax-gmin)
+                b = 255*(b-bmin)/(bmax-bmin)
+            else:
+                r = (r-rmin)*((Imax - Imin)/(rmax - rmin)) + Imin
+                g = (g-gmin)*((Imax - Imin)/(gmax - gmin)) + Imin
+                b = (b-bmin)*((Imax - Imin)/(bmax - bmin)) + Imin
             new_image[i][j] = (r,g,b)
     return new_image
 
@@ -74,8 +75,11 @@ def powerTransformation(image, gamma):
             new_image[i][j] = (r,g,b)
     return new_image
 
-image = Image.open("../test/1_1_Before.jpg")
-image = np.asarray(image)
-new_image = np.array(powerTransformation(image,0.1))
-img = Image.fromarray(new_image)
-img.save('../test/1_1_After.jpg')
+# image = Image.open("../test/1_2_After.jpg")
+# image = np.asarray(image)
+# # print(image)
+# # print('-----------------')
+# new_image = np.array(contrast(image))
+# # print(new_image)
+# img = Image.fromarray(new_image)
+# img.save('../test/1_2_After.png')
