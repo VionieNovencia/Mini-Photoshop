@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Photoshop</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename = 'style.css')}}"
+    />
+  </head>
+  <body>
+    <h1 class="header">Mini Photoshop</h1>
+    <div class="content">
+      <div
+        class="display"
+        style="
+          width: 90vh;
+          height: 80vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 10px;
+          margin: 0px;
+        "
+      >
+        <form method="post" action="/upload" enctype="multipart/form-data">
+          <h5>Upload Image</h5>
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            autocomplete="off"
+            onchange="loadFile(event)"
+            required
+          />
+          <img id="output" style="width: 100vh; height: 70vh" />
+          <form>
+            <button
+              type="submit"
+              formaction="upload"
+              onclick="UploadFile(event)"
+            >
+              submit
+            </button>
+          </form>
+        </form>
+      </div>
+      <script>
+        var loadFile = function (event) {
+          var reader = new FileReader();
+          reader.onload = function () {
+            var output = document.getElementById("output");
+            output.src = reader.result;
+          };
+          reader.readAsDataURL(event.target.files[0]);
+        };
+      </script>
+    </div>
+  </body>
+</html>

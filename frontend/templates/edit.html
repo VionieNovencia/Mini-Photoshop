@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Photoshop</title>
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <h1 class="header">Mini Photoshop</h1>
+    <div
+      class="content"
+      style="
+        display: flex;
+        flex-direction: row;
+        width: 100vh;
+        height: 100vh;
+        padding: 0px;
+      "
+    >
+      <div
+        class="fitur"
+        style="
+          display: flex;
+          flex-direction: column;
+          float: left;
+          background-color: #cee5d0;
+          justify-content: space-around;
+          padding: 10px;
+          margin-top: 0px;
+          width: 20vh;
+          height: 90vh;
+        "
+      >
+        <form action="/negative" method="post">
+          <button>Negative</button>
+          <input type="hidden" name="image" value="{{ filename }}" />
+        </form>
+
+        <form action="/grayscale" method="post">
+          <button onclick="grayscale">Grayscale</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/complement" method="post">
+          <button onclick="complement">Complement</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/flipv" method="post">
+          <button onclick="complement">flipv></button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/fliph" method="post">
+          <button onclick="complement">flip-h</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/rotateccw" method="post">
+          <button onclick="complement">rotate ccw</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+        <form action="/rotatecw" method="post">
+          <button onclick="complement">rotate cw</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+        <form action="/zoomout" method="post">
+          <button onclick="complement">zoom out</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+        <form action="/zoomin" method="post">
+          <button onclick="complement">zoom in</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/brightening" method="post">
+          <button onclick="complement">Brightening</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/contrast" method="post">
+          <button onclick="complement">Contrast</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/ltransformation" method="post">
+          <button onclick="complement">Log Transformation</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/ptransformation" method="post">
+          <button onclick="complement">Power Transformation</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/blur" method="post">
+          <button onclick="complement">Bluring</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/sharp" method="post">
+          <button onclick="complement">Sharpening</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/noise" method="post">
+          <button onclick="complement">Noise</button>
+          <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+      </div>
+      <div class="image">
+        {% if filename %} <img src={{ "../static/" + filename }} alt="User
+        Image" /> {% endif %}
+        <p>{{filename}}</p>
+      </div>
+    </div>
+  </body>
+</html>
