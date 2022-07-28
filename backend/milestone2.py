@@ -64,7 +64,8 @@ def logTransformation(image):
             new_image[i][j] = (r,g,b)
     return new_image
 
-def powerTransformation(image, gamma):
+def powerTransformation(image):
+    gamma = 2
     new_image = image
     for i in range(len(image)):
         for j in range(len(image[i])):
@@ -74,12 +75,3 @@ def powerTransformation(image, gamma):
             b = round(255*(b/255)**gamma)
             new_image[i][j] = (r,g,b)
     return new_image
-
-# image = Image.open("../test/1_2_After.jpg")
-# image = np.asarray(image)
-# # print(image)
-# # print('-----------------')
-# new_image = np.array(contrast(image))
-# # print(new_image)
-# img = Image.fromarray(new_image)
-# img.save('../test/1_2_After.png')

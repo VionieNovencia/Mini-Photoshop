@@ -1,3 +1,5 @@
+import numpy as np
+
 def negative(image):
     w,h = image.shape[:2]
     new_image = image
@@ -28,53 +30,44 @@ def complement(image):
 
 def rotate90CCW(image):
     w,h = image.shape[:2]
-    new_image = []
+    new_image = np.zeros((h,w,3), np.uint8)
 
-    for i in range(h):
-        temp = []
-        for j in range(w):
-            value= image[j][h-i-1]
-            temp.append(value)
-        new_image.append(temp)
+    for k in range(3):
+        for i in range(w):
+            for j in range(h):
+                new_image[j][i][k] = image[i][h-j-1][k]
         
     return new_image
 
 def rotate90CW(image):
     w,h = image.shape[:2]
-    new_image = []
+    new_image = np.zeros((h,w,3), np.uint8)
 
-    for i in range(h):
-        temp = []
-        for j in range(w):
-            value= image[w-j-1][i]
-            temp.append(value)
-        new_image.append(temp)
-        
+    for k in range(3):
+        for i in range(w):
+            for j in range(h):
+                new_image[j][i][k] = image[w-i-1][j][k]
     return new_image
 
 def flip_horizontal(image):
     w,h = image.shape[:2]
-    new_image = []
+    new_image = np.zeros((w,h,3), np.uint8)
 
-    for i in range(w):
-        temp = []
-        for j in range(h):
-            value= image[w-i-1][j]
-            temp.append(value)
-        new_image.append(temp)
-        
+    for k in range(3):
+        for i in range(w):
+            for j in range(h):
+                new_image[i][j][k] = image[i][h-j-1][k]
+            
     return new_image
 
 def flip_vertical(image):
     w,h = image.shape[:2]
-    new_image = []
+    new_image = np.zeros((w,h,3), np.uint8)
 
-    for i in range(h):
-        temp = []
-        for j in range(w):
-            value= image[j][h-i-1]
-            temp.append(value)
-        new_image.append(temp)
+    for k in range(3):
+        for i in range(w):
+            for j in range(h):
+                new_image[i][j][k] = image[w-i-1][j][k]
         
     return new_image
 
