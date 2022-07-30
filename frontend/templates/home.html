@@ -11,16 +11,17 @@
     />
   </head>
   <body>
-    <h1 class="header">Mini Photoshop</h1>
+    <h3>Mini Photoshop</h3>
     <div class="content">
       <div
-        class="display"
+        class="upload"
         style="
-          width: 90vh;
-          height: 80vh;
           display: flex;
           flex-direction: column;
+          width: 90vw;
+          height: 80vh;
           align-items: center;
+          text-align: center;
           padding: 10px;
           margin: 0px;
         "
@@ -35,18 +36,19 @@
             onchange="loadFile(event)"
             required
           />
-          <img id="output" style="width: 100vh; height: 70vh" />
-          <form>
+          <br/>
+            <img id="output" />
+          <br/>
             <button
               type="submit"
               formaction="upload"
-              onclick="UploadFile(event)"
             >
               submit
             </button>
-          </form>
         </form>
       </div>
+      
+    </div>
       <script>
         var loadFile = function (event) {
           var reader = new FileReader();

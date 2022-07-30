@@ -1,6 +1,4 @@
-from tkinter import image_names
-from cv2 import blur
-from flask import Flask,render_template,redirect,request, url_for
+from flask import Flask,render_template,request
 import sys
 sys.path.append('../')
 import numpy as np
@@ -17,9 +15,11 @@ app.config["Folder_upload"] = os.getcwd()+ "\\static\\"
 app.config["Image_upload"] = os.getcwd() + "\\..\\test\\"
 app.config["Image_download"] = os.getcwd() + "\\..\\test\\"
 
+stack = []
+now = []
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    print("home")
+    print("home") 
     return render_template("home.html", filename = None)
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -28,18 +28,62 @@ def upload():
     if request.method == 'POST':
         image_input = request.files["image"]
         filename = secure_filename(image_input.filename)
-        # filename = get_filename(image_input.filename, "Before")
-        # image.save(os.path.join(app.config['Image_upload'], filename))
         filename = get_filename(filename,"0")
         image_input.save(os.path.join(app.config["Folder_upload"], filename))
+        filename1 = new_filename(filename, "Before")
+        copy_image(os.path.join(app.config["Folder_upload"], filename), os.path.join(app.config["Image_upload"], filename1))
+        stack.append(filename)
+        now.append(filename)
         print(filename)
     return render_template("edit.html", filename =  filename)
 
+@app.route('/undo', methods=['GET', 'POST'])
+def undo_image():
+    print("undo")
+    if len(stack) > 0 and len(now) > 0:
+        filename = now[0]
+        now.pop()
+        undo_image = new_filename(filename, "-1")
+        now.append(undo_image)
+        if undo_image in stack:
+            return render_template("edit.html", filename = undo_image)
+        else:
+            return render_template("edit.html", filename =None)
+    else:
+        filename = None
+    return render_template("edit.html", filename =  filename)
+
+@app.route('/redo', methods=['GET', 'POST'])
+def redo_image():
+    print("redo")
+    if len(stack) > 0 and len(now) > 0:
+        filename = now[0]
+        now.pop()
+        redo_image = new_filename(filename, 1)
+        now.append(redo_image)
+        if redo_image in stack:
+            return render_template("edit.html", filename = redo_image)
+        else:
+            return render_template("edit.html", filename =None)
+    else:
+        filename = None
+    return render_template("edit.html", filename =  filename)
+
+@app.route('/download', methods=['GET', 'POST'])
+def download_image():
+    print("download")
+    if len(now) > 0:
+        filename = now[0]
+        filename1 = new_filename(filename, "After")
+        copy_image(os.path.join(app.config["Folder_upload"], now[0]), os.path.join(app.config["Image_download"], filename1))
+        return render_template("../frontend/templates/edit.html", filename = filename)
+    else:
+        return render_template("edit.html", filename = None)
+        
 @app.route('/<command>', methods=['GET', 'POST'])
 def editImage(command):
     if request.method == 'POST':
-        filename = request.form["image"]
-        filename = secure_filename(filename)
+        filename = now[0]
         image_input = readImage(os.path.join(app.config["Folder_upload"], filename))
         image_input = np.asarray(image_input)
         if image_input == "File tidak ditemukan.":
@@ -68,8 +112,8 @@ def editImage(command):
                 result = rotate90CW(image_input)
             elif command == "zoomout":
                 result = zoom_out(image_input)
-            # elif command == "zoomin":
-            #     result = zoom_in(image_input)
+            elif command == "zoomin":
+                result = zoom_in(image_input)
             elif command == "brightening":
                 result = brightening(image_input)
             elif command == "contrast":
@@ -85,8 +129,12 @@ def editImage(command):
             elif command == "noise":
                 result = noise(image_input)
             result = Image.fromarray(result)
-            filename = new_filename(filename)
+            filename = new_filename(filename,1)
             print(filename)
+            stack.append(filename)
+            now.pop()
+            now.append(filename)
+            print(now)
             result.save(os.path.join(app.config["Folder_upload"], filename))
             return render_template("edit.html", filename = filename )
     return render_template("edit.html", filename = None)

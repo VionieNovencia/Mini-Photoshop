@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="../static/style.css" />
   </head>
   <body>
-    <h1 class="header">Mini Photoshop</h1>
+    <div class="header">
+      <h3>Mini Photoshop</h3>
+    </div>
     <div
       class="content"
       style="
@@ -19,95 +21,191 @@
         padding: 0px;
       "
     >
-      <div
-        class="fitur"
-        style="
-          display: flex;
-          flex-direction: column;
-          float: left;
-          background-color: #cee5d0;
-          justify-content: space-around;
-          padding: 10px;
-          margin-top: 0px;
-          width: 20vh;
-          height: 90vh;
-        "
-      >
+      <div class="fitur">
+        <form action="/undo" method="post">
+          <button>
+            <img
+              src="../static/assets/undo.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
+          <input type="hidden" name="image" value="{{ filename }}" />
+        </form>
+        <form action="/redo" method="post">
+          <button>
+            <img
+              src="../static/assets/redo.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
+          <input type="hidden" name="image" value="{{ filename }}" />
+        </form>
         <form action="/negative" method="post">
-          <button>Negative</button>
+          <button>
+            <img
+              src="../static/assets/negative.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{ filename }}" />
         </form>
 
         <form action="/grayscale" method="post">
-          <button onclick="grayscale">Grayscale</button>
+          <button onclick="grayscale">
+            <img
+              src="../static/assets/grayscale.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
 
         <form action="/complement" method="post">
-          <button onclick="complement">Complement</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/complement.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
 
         <form action="/flipv" method="post">
-          <button onclick="complement">flipv></button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/flip-v.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
 
         <form action="/fliph" method="post">
-          <button onclick="complement">flip-h</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/flip-h.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
 
         <form action="/rotateccw" method="post">
-          <button onclick="complement">rotate ccw</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/rotate-ccw.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
+
         <form action="/rotatecw" method="post">
-          <button onclick="complement">rotate cw</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/rotate-cw.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
         <form action="/zoomout" method="post">
-          <button onclick="complement">zoom out</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/zoom-out.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
         <form action="/zoomin" method="post">
-          <button onclick="complement">zoom in</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/zoom-in.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
 
         <form action="/brightening" method="post">
-          <button onclick="complement">Brightening</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/brightening.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
 
         <form action="/contrast" method="post">
-          <button onclick="complement">Contrast</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/contrast.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
 
         <form action="/ltransformation" method="post">
-          <button onclick="complement">Log Transformation</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/log.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
 
         <form action="/ptransformation" method="post">
-          <button onclick="complement">Power Transformation</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/power.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
 
         <form action="/blur" method="post">
-          <button onclick="complement">Bluring</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/blur.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
 
         <form action="/sharp" method="post">
-          <button onclick="complement">Sharpening</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/sharpen.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
 
         <form action="/noise" method="post">
-          <button onclick="complement">Noise</button>
+          <button onclick="complement">
+            <img
+              src="../static/assets/noise.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
           <input type="hidden" name="image" value="{{filename}}" />
+        </form>
+
+        <form action="/download" method="post" style="float: right">
+          <button>
+            <img
+              src="../static/assets/download.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
+          <input type="hidden" name="image" value="{{ filename }}" />
         </form>
       </div>
       <div class="image">
