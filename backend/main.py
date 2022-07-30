@@ -11,8 +11,8 @@ def readImage(path):
     except:
         return "File tidak ditemukan."
 
-image = readImage("../frontend/static/1_1_0.jpg")
+image = readImage("../frontend/static/1_2_Before_0.jpg")
 image = np.asarray(image)
-new_image = np.array(rotate90CCW(image))
+new_image = np.array(flip_vertical(image))
 img = Image.fromarray(new_image,'RGB')
 img.save('../frontend/static/1_1_After.jpg')

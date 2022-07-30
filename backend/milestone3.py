@@ -19,27 +19,33 @@ def gaussianblur(image):
         for j in range (kernel_size):
             kernel[i][j] = kernel[i][j]/sum
 
-    new_image = image
-    w,h = image.shape[:2]
+    w,h,d = image.shape[:3]
+    new_image = np.zeros((w,h,d), np.uint8)
     for i in range(w):
         for j in range(h):
-            r = 0
-            g = 0
-            b = 0
-            for k in range(kernel_size):
-                for l in range(kernel_size):
-                    if i-k >= 0 and i-k < w and j-l >= 0 and j-l < h:
-                        r += image[i-k][j-l][0] * kernel[k][l]
-                        g += image[i-k][j-l][1] * kernel[k][l]
-                        b += image[i-k][j-l][2] * kernel[k][l]
-            new_image[i][j] = (r,g,b)
+            if d == 4 or d == 3:
+                r = 0
+                g = 0
+                b = 0
+                for k in range(kernel_size):
+                    for l in range(kernel_size):
+                        if i-k >= 0 and i-k < w and j-l >= 0 and j-l < h:
+                            r += image[i-k][j-l][0] * kernel[k][l]
+                            g += image[i-k][j-l][1] * kernel[k][l]
+                            b += image[i-k][j-l][2] * kernel[k][l]
+                if d == 4:
+                    new_image[j][i] = (r,g,b,image[i][j][3])
+                else:
+                    new_image[i][j] = (r,g,b)
+            else:
+                new_image[i][j] = image[i-k][j-l]* kernel[k][l]
     return new_image
 
 def gaussianHighpass(image):
     kernel_size = 3
     kernel = np.array([[-1,-1,-1],[-1,8,-1],[-1,-1,-1]])
-    new_image = image
-    w,h = image.shape[:2]
+    w,h,d = image.shape[:3]
+    new_image = np.zeros((w,h,d), np.uint8)
     for i in range(w):
         for j in range(h):
             r = 0
@@ -55,35 +61,22 @@ def gaussianHighpass(image):
     return new_image
 
 def noise(image):
-    new_image = image
-    w,h = image.shape[:2]
+    w,h,d = image.shape[:3]
+    new_image = np.zeros((w,h,d), np.uint8)
+
+    
     for i in range(w):
         for j in range(h):
-            r,g,b = image[i][j]
-            r = r + np.random.randint(-50,50)
-            g = g + np.random.randint(-50,50)
-            b = b + np.random.randint(-50,50)
-            if r < 0:
-                r = 0
-            if r > 255:
-                r = 255
-            if g < 0:
-                g = 0
-            if g > 255:
-                g = 255
-            if b < 0:
-                b = 0
-            if b > 255:
-                b = 255
-            new_image[i][j] = (r,g,b)
+            if d == 4 or d == 3:
+                r,g,b = image[i][j]
+                r = r + np.random.randint(-50,50)
+                g = g + np.random.randint(-50,50)
+                b = b + np.random.randint(-50,50)
+                if d == 4:
+                    new_image[j][i] = (r,g,b,image[i][j][3])
+                else:
+                    new_image[i][j] = (r,g,b)
+            else:
+                new_image[i][j] = image[i][j] + np.random.randint(-50,50)
     return new_image
 
-
-# image = Image.open("../test/1_1_Before.jpg")
-# image = np.asarray(image)
-# # print(image)
-# # print('-----------------')
-# new_image = np.array(gaussianHighpass(image))
-# # print(new_image)
-# img = Image.fromarray(new_image)
-# img.save('../test/1_1_After.png')
