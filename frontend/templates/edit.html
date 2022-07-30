@@ -51,7 +51,7 @@
         </form>
 
         <form action="/grayscale" method="post">
-          <button onclick="grayscale">
+          <button>
             <img
               src="../static/assets/grayscale.png"
               style="width: 20; height: 20px"
@@ -61,7 +61,7 @@
         </form>
 
         <form action="/complement" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/complement.png"
               style="width: 20; height: 20px"
@@ -71,7 +71,7 @@
         </form>
 
         <form action="/flipv" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/flip-v.png"
               style="width: 20; height: 20px"
@@ -81,7 +81,7 @@
         </form>
 
         <form action="/fliph" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/flip-h.png"
               style="width: 20; height: 20px"
@@ -91,7 +91,7 @@
         </form>
 
         <form action="/rotateccw" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/rotate-ccw.png"
               style="width: 20; height: 20px"
@@ -101,7 +101,7 @@
         </form>
 
         <form action="/rotatecw" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/rotate-cw.png"
               style="width: 20; height: 20px"
@@ -110,7 +110,7 @@
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
         <form action="/zoomout" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/zoom-out.png"
               style="width: 20; height: 20px"
@@ -119,7 +119,7 @@
           <input type="hidden" name="image" value="{{filename}}" />
         </form>
         <form action="/zoomin" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/zoom-in.png"
               style="width: 20; height: 20px"
@@ -129,7 +129,7 @@
         </form>
 
         <form action="/brightening" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/brightening.png"
               style="width: 20; height: 20px"
@@ -139,7 +139,7 @@
         </form>
 
         <form action="/contrast" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/contrast.png"
               style="width: 20; height: 20px"
@@ -149,7 +149,7 @@
         </form>
 
         <form action="/ltransformation" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/log.png"
               style="width: 20; height: 20px"
@@ -159,7 +159,7 @@
         </form>
 
         <form action="/ptransformation" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/power.png"
               style="width: 20; height: 20px"
@@ -169,7 +169,7 @@
         </form>
 
         <form action="/blur" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/blur.png"
               style="width: 20; height: 20px"
@@ -179,7 +179,7 @@
         </form>
 
         <form action="/sharp" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/sharpen.png"
               style="width: 20; height: 20px"
@@ -189,7 +189,7 @@
         </form>
 
         <form action="/noise" method="post">
-          <button onclick="complement">
+          <button>
             <img
               src="../static/assets/noise.png"
               style="width: 20; height: 20px"
@@ -202,6 +202,16 @@
           <button>
             <img
               src="../static/assets/download.png"
+              style="width: 20; height: 20px"
+            />
+          </button>
+          <input type="hidden" name="image" value="{{ filename }}" />
+        </form>
+
+        <form action="/reset" method="post" style="float: right">
+          <button>
+            <img
+              src="../static/assets/reset.jpg"
               style="width: 20; height: 20px"
             />
           </button>

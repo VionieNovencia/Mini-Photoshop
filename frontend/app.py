@@ -76,10 +76,25 @@ def download_image():
         filename = now[0]
         filename1 = new_filename(filename, "After")
         copy_image(os.path.join(app.config["Folder_upload"], now[0]), os.path.join(app.config["Image_download"], filename1))
-        return render_template("../frontend/templates/edit.html", filename = filename)
+        return render_template(".html", filename = filename)
     else:
         return render_template("edit.html", filename = None)
         
+@app.route('/reset', methods=['GET', 'POST'])
+def reset_image():
+    print("reset")
+    if len(now) > 0:
+        filename = now[0]
+        print(filename)
+        filename1 = new_filename(filename, "base")
+        print(filename1)
+        now.pop()
+        for i in range (len(stack)):
+            stack.pop()
+        return render_template("edit.html", filename = filename1)
+    else:
+        return render_template("edit.html", filename = now[0])
+
 @app.route('/<command>', methods=['GET', 'POST'])
 def editImage(command):
     if request.method == 'POST':

@@ -94,7 +94,7 @@ def rotate90CW(image):
                 new_image[j][i] = image[w-i-1][j]
     return new_image
 
-def flip_horizontal(image):
+def flip_vertical(image):
     w,h,d = image.shape[:3]
     new_image = np.zeros((w,h,d), np.uint8)
 
@@ -111,7 +111,7 @@ def flip_horizontal(image):
                 new_image[i][j] = image[i][h-j-1]
     return new_image
 
-def flip_vertical(image):
+def flip_horizontal(image):
     w,h,d = image.shape[:3]
     new_image = np.zeros((w,h,d), np.uint8)
     

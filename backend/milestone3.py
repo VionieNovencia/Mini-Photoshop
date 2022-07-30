@@ -19,6 +19,7 @@ def gaussianblur(image):
         for j in range (kernel_size):
             kernel[i][j] = kernel[i][j]/sum
 
+    print(image.shape)
     w,h,d = image.shape[:3]
     new_image = np.zeros((w,h,d), np.uint8)
     for i in range(w):
@@ -34,7 +35,7 @@ def gaussianblur(image):
                             g += image[i-k][j-l][1] * kernel[k][l]
                             b += image[i-k][j-l][2] * kernel[k][l]
                 if d == 4:
-                    new_image[j][i] = (r,g,b,image[i][j][3])
+                    new_image[i][j] = (r,g,b,image[i][j][3])
                 else:
                     new_image[i][j] = (r,g,b)
             else:
@@ -64,19 +65,23 @@ def noise(image):
     w,h,d = image.shape[:3]
     new_image = np.zeros((w,h,d), np.uint8)
 
-    
-    for i in range(w):
-        for j in range(h):
-            if d == 4 or d == 3:
+    if d == 4:
+        for i in range(w):
+            for j in range(h):
+                r,g,b,a = image[i][j]
+                r = r + np.random.randint(-50,50)
+                g = g + np.random.randint(-50,50)
+                b = b + np.random.randint(-50,50)
+                new_image[i][j] = (r,g,b,a)
+    elif d == 3:
+        for i in range(w):
+            for j in range(h):
                 r,g,b = image[i][j]
                 r = r + np.random.randint(-50,50)
                 g = g + np.random.randint(-50,50)
                 b = b + np.random.randint(-50,50)
-                if d == 4:
-                    new_image[j][i] = (r,g,b,image[i][j][3])
-                else:
-                    new_image[i][j] = (r,g,b)
-            else:
-                new_image[i][j] = image[i][j] + np.random.randint(-50,50)
+                new_image[i][j] = (r,g,b)
+    else:
+        new_image[i][j] = image[i][j] + np.random.randint(-50,50)
     return new_image
 

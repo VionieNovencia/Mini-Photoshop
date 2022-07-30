@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image
 from milestone1 import *
 from milestone2 import *
+from milestone3 import *
 
 
 def readImage(path):
@@ -13,6 +14,6 @@ def readImage(path):
 
 image = readImage("../frontend/static/1_2_Before_0.jpg")
 image = np.asarray(image)
-new_image = np.array(flip_vertical(image))
+new_image = np.array(gaussianblur(image))
 img = Image.fromarray(new_image,'RGB')
 img.save('../frontend/static/1_1_After.jpg')

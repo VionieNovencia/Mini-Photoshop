@@ -16,6 +16,8 @@ def new_filename(filename, increment):
         try:
             addition = int(filename[name-1]) + int(increment)
         except:
+            if increment == "base":
+                addition = 0
             addition = increment
         filename = filename[:name-1]
         filename = "_".join(filename)
