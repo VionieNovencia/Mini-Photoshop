@@ -76,7 +76,7 @@ def download_image():
         filename = now[0]
         filename1 = new_filename(filename, "After")
         copy_image(os.path.join(app.config["Folder_upload"], now[0]), os.path.join(app.config["Image_download"], filename1))
-        return render_template(".html", filename = filename)
+        return render_template("edit.html", filename = filename)
     else:
         return render_template("edit.html", filename = None)
         
